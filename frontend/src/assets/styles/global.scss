@@ -1,0 +1,27 @@
+@import 'variables';
+
+body {
+  background-color: $light-gray;
+  color: $dark-gray;
+  font-family: 'Arial', sans-serif;
+}
+
+a {
+  color: $primary-color;
+  &:hover {
+    color: darken($primary-color, 10%);
+  }
+}
+
+.button {
+  background-color: $primary-color;
+  color: $light-gray;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
