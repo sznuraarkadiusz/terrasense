@@ -25,7 +25,7 @@ export default {
   },
   mounted() {
     this.fetchData();
-    setInterval(this.fetchData, 10000); // Odświeżanie danych co 10 sekund
+    setInterval(this.fetchData, 10000);
   }
 }
 </script>
