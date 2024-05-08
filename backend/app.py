@@ -284,6 +284,33 @@ def api_toggle_sensor(sensor):
     sensor_states[sensor] = not current_state
     return jsonify({'success': True, 'message': f'{sensor} toggled to {sensor_states[sensor]}'})
 
+@app.route('/api/sensor-data')
+def get_sensor_data():
+    start = request.args.get('start')
+    end = request.args.get('end')
+
+    start_time = datetime.strptime(start, '%Y-%m-%dT%H:%M')
+    end_time = datetime.strptime(end, '%Y-%m-%dTa%H:%M')
+    start_time_str = start_time.strftime('%Y-%m-%dT%H:%M:%SZ')
+    end_time_str = end_time.strftime('%Y-%m-%dT%H:%M:%SZ')
+
+    query = f"SELECT * FROM environment WHERE time >= '{start_time_str}' AND time <= '{end_time_str}'"
+    try:
+        results = influx_client.query(query)
+        points = list(results.get_points(measurement='environment'))
+        data = [{
+            'time': point['time'],
+            'temperature': point['temperature'],
+            'humidity': point['humidity'],
+            'light': point['light'],
+            'co': point['co'],
+            'smoke': point['smoke'],
+            'airQuality': point['airQuality']
+        } for point in points]
+        return jsonify(data)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 start_scheduler()
 
 if __name__ == '__main__':

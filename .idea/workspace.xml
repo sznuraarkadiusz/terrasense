@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1b118d3e-e8ab-401b-8f25-df9c92f0e800" name="Changes" comment="grafana, rfid implemented." />
+    <list default="true" id="1b118d3e-e8ab-401b-8f25-df9c92f0e800" name="Changes" comment="grafana, rfid implemented.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/dist/css/app.2be454a1.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/dist/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/dist/js/app.615daa22.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/dist/js/app.615daa22.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/dist/js/chunk-vendors.5f013b80.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/dist/js/chunk-vendors.5f013b80.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/dashboard/NavbarDashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/dashboard/NavbarDashboard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/dashboard/SidebarDashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/dashboard/SidebarDashboard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/CalendarView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/CalendarView.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -90,7 +104,7 @@
       <workItem from="1712591118761" duration="598000" />
       <workItem from="1713126598807" duration="4693000" />
       <workItem from="1713133908175" duration="99000" />
-      <workItem from="1713134017478" duration="203918000" />
+      <workItem from="1713134017478" duration="218675000" />
     </task>
     <task id="LOCAL-00001" summary="grafana, rfid implemented.">
       <created>1713900054968</created>

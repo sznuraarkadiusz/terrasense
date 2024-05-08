@@ -4,7 +4,7 @@ import LoginPrompt from '@/components/dashboard/LoginPrompt.vue';
 import Notifications from '@/components/dashboard/NotificationsSettings.vue';
 import SensorManager from '@/components/settings/SensorManager.vue';
 import Settings from '@/views/SystemSettings.vue';
-import CalendarView from "@/views/CalendarView";
+import CalendarView from '@/views/CalendarView';
 
 
 const routes = [
