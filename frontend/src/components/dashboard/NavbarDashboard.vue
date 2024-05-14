@@ -23,7 +23,7 @@
       <ul>
         <li class="p-3 hover:bg-gray-700"><router-link to="/" @click="toggleMenu">Strona główna</router-link></li>
         <li class="p-3 hover:bg-gray-700"><router-link to="/notifications" @click="toggleMenu">Powiadomienia</router-link></li>
-        <li class="p-3 hover:bg-gray-700"><router-link to="/calendar" @click="toggleMenu">Kalendarz</router-link></li>
+        <li class="p-3 hover:bg-gray-700"><router-link to="/cale" @click="toggleMenu">Kalendarz</router-link></li>
         <li class="p-3 hover:bg-gray-700"><router-link to="/settings" @click="toggleMenu">Ustawienia</router-link></li>
         <li class="p-3 hover:bg-gray-700"><a href="#" @click="toggleMenu">Pomoc</a></li>
         <li class="p-3 hover:bg-gray-700"><a href="http://192.168.68.155:3000" target="_blank" @click="toggleMenu">Grafana</a></li>

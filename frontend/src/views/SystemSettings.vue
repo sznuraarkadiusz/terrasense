@@ -5,6 +5,7 @@
         <sensor-manager></sensor-manager>
           <alert-interval></alert-interval>
         <colors-customization @colorUpdated="handleColorUpdated"></colors-customization>
+      <calendar-interval></calendar-interval>
     </div>
   </div>
 </template>
@@ -13,12 +14,14 @@
 import SensorManager from '@/components/settings/SensorManager.vue';
 import AlertInterval from '@/components/settings/AlertInterval.vue';
 import ColorsCustomization from "@/components/settings/ColorsCustomization.vue";
+import CalendarInterval from "@/components/settings/CalendarInterval";
 
 export default {
   components: {
     SensorManager,
     AlertInterval,
-    ColorsCustomization
+    ColorsCustomization,
+    CalendarInterval
   },
   methods: {
     handleColorUpdated(newColor) {

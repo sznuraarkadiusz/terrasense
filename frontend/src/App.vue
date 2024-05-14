@@ -3,7 +3,7 @@
     <NavbarDashboard/>
     <div class="flex flex-1">
       <SidebarDashboard class="w-56"/>
-      <div class="flex flex-col flex-1 main bg-white">
+      <div class="flex flex-col flex-1 main bg-white w-full">
         <router-view class="flex-1"/>
       </div>
     </div>
