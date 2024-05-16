@@ -87,7 +87,7 @@
               .then(response => response.json())
               .then(data => {
                   this.alertSettings = {...this.alertSettings, ...data};
-                  console.log("Fetched and updated settings:", this.alertSettings);
+                  console.log("Zaktualizowano ustawienia", this.alertSettings);
               })
               .catch(error => console.error('Error:', error));
       },
@@ -97,11 +97,11 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(this.alertSettings)
         })
-        .then(() => alert('Settings saved!'))
+        .then(() => alert('Zapisano ustawienia'))
         .catch(error => console.error('Error:', error));
       },
       deleteAlert(sensor) {
-          if (confirm(`Are you sure you want to delete the ${sensor} alert?`)) {
+          if (confirm(`Jesteś pewien, że chcesz usunać alert: ${sensor}`)) {
               fetch(`/set-alerts?type=${sensor}`, { method: 'DELETE' })
                   .then(response => response.json())
                   .then(result => {

@@ -5,7 +5,8 @@ import Notifications from '@/components/dashboard/NotificationsSettings.vue';
 import SensorManager from '@/components/settings/SensorManager.vue';
 import Settings from '@/views/SystemSettings.vue';
 import CalendarView from '@/views/CalendarView';
-
+import loginUser from '@/components/users/loginUser';
+import managementUser from '@/components/users/managementUser'
 
 const routes = [
   {
@@ -37,6 +38,19 @@ const routes = [
     path: '/calendar',
     name: 'CalendarView',
     component: CalendarView
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: loginUser
+  },
+  {
+  path: '/user-management',
+  name: 'managementUser',
+  component: managementUser,
+  meta: {
+    requiresAuth: true
+  }
   }
   ];
 
@@ -45,18 +59,17 @@ const router = createRouter({
   routes
 });
 
-router.beforeEach((to, from, next) => {
-  const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
-
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!isAuthenticated) {
-      next({ name: 'LoginPrompt' });
-    } else {
-      next();
-    }
-  } else {
-    next();
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+//   const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+//
+//   if (requiresAuth && !isAuthenticated) {
+//     next('/login-prompt');
+//   } else if (!requiresAuth && isAuthenticated && to.path === '/login-prompt') {
+//     next('/');
+//   } else {
+//     next();
+//   }
+// });
 
 export default router;

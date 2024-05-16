@@ -119,11 +119,9 @@
           .catch((error) => console.error('Błąd podczas pobierania danych z czujników:', error));
       },
       clearFilters() {
-        this.showColumns = { time: true, ...this.defaultColumns };
-        this.timeFilter = {
-          start: '',
-          end: ''
-        };
+        this.showColumns = { ...this.defaultColumns, time: true };
+        this.timeFilter = { start: '', end: '' };
+        this.sensorData = [];
       }
     }
   };

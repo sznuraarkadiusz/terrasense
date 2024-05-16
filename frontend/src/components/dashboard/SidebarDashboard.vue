@@ -9,6 +9,7 @@
           <li class="p-3 hover:bg-gray-700"><router-link to="/notifications">Powiadomienia</router-link></li>
           <li class="p-3 hover:bg-gray-700"><router-link to="/calendar">Kalendarz</router-link></li>
           <li class="p-3 hover:bg-gray-700"><router-link to="/settings">Ustawienia</router-link></li>
+          <li class="p-3 hover:bg-gray-700"><router-link to="/user-management">Użytkownicy</router-link></li>
           <li class="p-3 hover:bg-gray-700"><a href="#">Pomoc</a></li>
           <li class="p-3 hover:bg-gray-700"><a href="http://192.168.68.155:3000" target="_blank">Grafana</a></li>
         </ul>
@@ -37,10 +38,15 @@ export default {
       if (loggedIn) {
         this.user = { name: 'admin' };
       }
+    },
+    logout(){
+              this.user = null;
     }
   },
   mounted() {
     this.checkLoginStatus();
+    window.addEventListener('logout', this.logout)
+    window.addEventListener('login', this.checkLoginStatus)
   }
 };
 </script>
