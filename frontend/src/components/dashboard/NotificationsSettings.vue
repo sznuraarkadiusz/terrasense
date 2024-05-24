@@ -6,12 +6,19 @@
           <div class="bg-white p-6 rounded-lg shadow-xl">
   <h2 class="text-xl font-semibold mb-4">Ustawienia alertów</h2>
       <form @submit.prevent="submitAlertSettings" class="flex flex-col items-center">
-      <div class="flex items-center mb-4" v-for="{key, value} in orderedSettings" :key="key">
-          <label :for="key" class="block text-gray-700 text-sm font-bold mr-2">{{ sensorNames[key] }}:</label>
-          <input type="checkbox" v-model="value.enabled" :id="key" class="form-checkbox h-6 w-6 rounded-full border border-gray-300 text-green-500 mr-2">
-          <input type="number" v-if="['temperature', 'humidity'].includes(key)" v-model="value.min" placeholder="Min" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight w-20 mr-2">
-          <input type="number" v-if="['temperature', 'humidity'].includes(key)" v-model="value.max" placeholder="Max" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight w-20">
-          <button @click.prevent="deleteAlert(key)" type="button" class="ml-2 px-3 py-1 bg-red-500 text-white text-sm leading-tight rounded hover:bg-red-700 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">Usuń</button>
+  <div v-for="{key, value} in orderedSettings" :key="key">
+                <label :for="key" class="block text-gray-700 font-bold mb-2">{{ sensorNames[key] }}:</label>
+    <div class="flex items-center mb-4">
+    <input type="checkbox" v-model="value.enabled" :id="key" class="form-checkbox h-6 w-6 rounded-full border border-gray-300 text-green-500 mr-2">
+    <input type="number" v-if="['temperature', 'humidity'].includes(key)" v-model="value.min" placeholder="Min" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight w-16 mr-2">
+    <input type="number" v-if="['temperature', 'humidity'].includes(key)" v-model="value.max" placeholder="Max" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight w-16">
+    <select v-model="value.priority" class="ml-2 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight">
+      <option value="critical">Krytyczny</option>
+      <option value="medium">Średni</option>
+      <option value="low">Niski</option>
+    </select>
+    <button @click.prevent="deleteAlert(key)" type="button" class="ml-2 px-3 py-1 bg-red-500 text-white text-sm leading-tight rounded hover:bg-red-700 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">Usuń</button>
+  </div>
         </div>
         <div class="mb-6">
           <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email do alertów:</label>
@@ -50,12 +57,12 @@
       return {
         order: ['temperature', 'humidity', 'light', 'co', 'smoke', 'airQuality', 'email'],
         alertSettings: {
-          temperature: { enabled: false, min: null, max: null },
-          humidity: { enabled: false, min: null, max: null },
-          light: { enabled: false },
-          co: { enabled: false },
-          smoke: { enabled: false },
-          airQuality: { enabled: false },
+          temperature: { enabled: false, min: null, max: null, priority: 'medium' },
+          humidity: { enabled: false, min: null, max: null, priority: 'medium' },
+          light: { enabled: false, priority: 'medium' },
+          co: { enabled: false, priority: 'medium' },
+          smoke: { enabled: false, priority: 'medium' },
+          airQuality: { enabled: false, priority: 'medium' },
           email: ''
         },
         sensorNames: {

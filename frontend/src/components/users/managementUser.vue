@@ -1,6 +1,6 @@
 <template>
   <div class="bg-gray-100 p-6">
-      <h1 class="dashboard__title text-center mx-auto">Użytkownicy</h1>
+    <h1 class="dashboard__title text-center mx-auto">Użytkownicy</h1>
     <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6">
       <div class="user-grid text-center font-bold py-2 border-b-2 mb-4">
         <div>ID</div>
@@ -50,7 +50,7 @@ export default {
           this.users = response.data;
         })
         .catch(error => {
-          console.error('Error fetching users:', error);
+          console.error('Błąd pobierania użytkowników:', error);
           alert('Błąd pobierania użytkowników: ' + error.message);
         });
     },
@@ -66,6 +66,7 @@ export default {
           alert('Użytkownik dodany!');
           this.fetchUsers();
           this.newUser.username = '';
+          window.dispatchEvent(new Event('userUpdated'));
         })
         .catch(error => {
           const errorMessage = error.response && error.response.data && error.response.data.error
@@ -79,6 +80,7 @@ export default {
         .then(() => {
           alert('Użytkownik usunięty');
           this.fetchUsers();
+          window.dispatchEvent(new Event('userUpdated'));
         })
         .catch(error => {
           alert('Błąd usuwania użytkownika: ' + error.response.data.error);

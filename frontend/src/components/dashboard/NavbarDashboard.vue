@@ -7,6 +7,9 @@
     </button>
     <p class="text-base lg:block hidden">Terra Sense v1.0.1</p>
     <div class="flex items-center">
+      <div v-if="!user && canRegister">
+        <router-link to="/register" class="py-2 px-4 bg-gray-700 hover:bg-gray-600 rounded">Zarejestruj</router-link>
+      </div>
       <div v-if="!user">
         <router-link to="/login" class="py-2 px-4 bg-gray-700 hover:bg-gray-600 rounded">Zaloguj</router-link>
       </div>
@@ -20,11 +23,11 @@
       <ul>
         <li class="p-3 hover:bg-gray-700"><router-link to="/" @click="toggleMenu">Strona główna</router-link></li>
         <li class="p-3 hover:bg-gray-700"><router-link to="/notifications" @click="toggleMenu">Powiadomienia</router-link></li>
-        <li class="p-3 hover:bg-gray-700"><router-link to="/calendar" @click="toggleMenu">Kalendarz</router-link></li>
+        <li class="p-3 hover:bg-gray-700"><router-link to="/calendar" @click="toggleMenu">Archiwum</router-link></li>
         <li class="p-3 hover:bg-gray-700"><router-link to="/settings" @click="toggleMenu">Ustawienia</router-link></li>
         <li class="p-3 hover:bg-gray-700"><router-link to="/user-management">Użytkownicy</router-link></li>
         <li class="p-3 hover:bg-gray-700"><a href="#" @click="toggleMenu">Pomoc</a></li>
-        <li class="p-3 hover:bg-gray-700"><a href="http://192.168.68.155:3000" target="_blank" @click="toggleMenu">Grafana</a></li>
+        <li class="p-3 hover:bg-gray-700"><a href="http://192.168.68.155:3000/d/cdm0ejxl5mv40c/wykresy?orgId=1&refresh=5s" target="_blank" @click="toggleMenu">Grafana</a></li>
       </ul>
     </div>
   </nav>
@@ -40,14 +43,15 @@ export default {
     return {
       user: null,
       menuOpen: false,
-      Logo
+      Logo,
+      canRegister: true
     };
   },
   methods: {
     toggleMenu() {
       this.menuOpen = !this.menuOpen;
     },
-    reload(){
+    reload() {
       this.user = null;
     },
     logout() {
@@ -55,7 +59,8 @@ export default {
         if (response.data.status === 'success') {
           this.user = null;
           localStorage.removeItem('isAuthenticated');
-          window.dispatchEvent(new Event('logout'))
+          window.dispatchEvent(new Event('logout'));
+          this.checkUserCount();
           alert('Wylogowano pomyślnie');
           this.$router.push('/login-prompt');
         } else {
@@ -68,17 +73,29 @@ export default {
         if (response.data.logged_in) {
           this.user = response.data.user;
           localStorage.setItem('isAuthenticated', 'true');
+          window.dispatchEvent(new Event('login'));
         } else {
           localStorage.removeItem('isAuthenticated');
           this.$router.push('/login-prompt');
         }
       });
+    },
+    checkUserCount() {
+      axios.get('/users')
+        .then(response => {
+          this.canRegister = response.data.length < 2;
+        })
+        .catch(error => {
+          console.error('Błąd sprawdzania liczby użytkowników:', error);
+        });
     }
   },
   mounted() {
     this.checkLoginStatus();
-    window.addEventListener('logout', this.reload)
-    window.addEventListener('login', this.checkLoginStatus)
+    this.checkUserCount();
+    window.addEventListener('logout', this.reload);
+    window.addEventListener('login', this.checkLoginStatus);
+    window.addEventListener('userUpdated', this.checkUserCount);
   },
   computed: {
     ...mapState(['sidebarBgColor']),

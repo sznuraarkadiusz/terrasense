@@ -1,8 +1,10 @@
 <template>
-  <div className="login-form">
-    <h2>Logowanie RFID</h2>
-    <input v-model="username" placeholder="Nazwa użytkownika" type="text">
-    <button @click="loginWithRFID">Zaloguj</button>
+  <div class="login-form bg-gray-100">
+      <h1 class="dashboard__title text-center mx-auto">Logowanie</h1>
+    <div class="max-w-xs mx-auto bg-white rounded-lg shadow-md p-6">
+    <input v-model="username" placeholder="Nazwa użytkownika" type="text" class="border p-2 rounded w-full mb-4">
+    <button @click="loginWithRFID" class="btn__alert--submit py-2 px-4 rounded focus:outline-none focus:shadow-outline">Zaloguj</button>
+  </div>
   </div>
 </template>
 
