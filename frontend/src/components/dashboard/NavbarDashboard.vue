@@ -7,11 +7,11 @@
     </button>
     <p class="text-base lg:block hidden">Terra Sense v1.0.1</p>
     <div class="flex items-center">
-      <div v-if="!user && canRegister">
-        <router-link to="/register" class="py-2 px-4 bg-gray-700 hover:bg-gray-600 rounded">Zarejestruj</router-link>
-      </div>
       <div v-if="!user">
         <router-link to="/login" class="py-2 px-4 bg-gray-700 hover:bg-gray-600 rounded">Zaloguj</router-link>
+      </div>
+      <div v-if="!user && canRegister">
+        <router-link to="/register" class="ml-2 py-2 px-4 bg-gray-700 hover:bg-gray-600 rounded">Zarejestruj</router-link>
       </div>
       <div v-else class="flex items-center">
         <img :src="Logo" alt="Terra Sense avatar" class="w-8 h-8 rounded-full mr-2" />
@@ -26,7 +26,6 @@
         <li class="p-3 hover:bg-gray-700"><router-link to="/calendar" @click="toggleMenu">Archiwum</router-link></li>
         <li class="p-3 hover:bg-gray-700"><router-link to="/settings" @click="toggleMenu">Ustawienia</router-link></li>
         <li class="p-3 hover:bg-gray-700"><router-link to="/user-management">Użytkownicy</router-link></li>
-        <li class="p-3 hover:bg-gray-700"><a href="#" @click="toggleMenu">Pomoc</a></li>
         <li class="p-3 hover:bg-gray-700"><a href="http://192.168.68.155:3000/d/cdm0ejxl5mv40c/wykresy?orgId=1&refresh=5s" target="_blank" @click="toggleMenu">Grafana</a></li>
       </ul>
     </div>
@@ -51,15 +50,12 @@ export default {
     toggleMenu() {
       this.menuOpen = !this.menuOpen;
     },
-    reload() {
-      this.user = null;
-    },
     logout() {
       axios.get('/logout').then(response => {
         if (response.data.status === 'success') {
-          this.user = null;
           localStorage.removeItem('isAuthenticated');
           window.dispatchEvent(new Event('logout'));
+          this.checkLoginStatus();
           this.checkUserCount();
           alert('Wylogowano pomyślnie');
           this.$router.push('/login-prompt');
@@ -73,10 +69,9 @@ export default {
         if (response.data.logged_in) {
           this.user = response.data.user;
           localStorage.setItem('isAuthenticated', 'true');
-          window.dispatchEvent(new Event('login'));
         } else {
+          this.user = null;
           localStorage.removeItem('isAuthenticated');
-          this.$router.push('/login-prompt');
         }
       });
     },
@@ -88,14 +83,23 @@ export default {
         .catch(error => {
           console.error('Błąd sprawdzania liczby użytkowników:', error);
         });
+    },
+    handleUserUpdate() {
+      this.checkLoginStatus();
+      this.checkUserCount();
     }
   },
   mounted() {
     this.checkLoginStatus();
     this.checkUserCount();
-    window.addEventListener('logout', this.reload);
-    window.addEventListener('login', this.checkLoginStatus);
-    window.addEventListener('userUpdated', this.checkUserCount);
+    window.addEventListener('logout', this.handleUserUpdate);
+    window.addEventListener('login', this.handleUserUpdate);
+    window.addEventListener('userUpdated', this.handleUserUpdate);
+  },
+  beforeUnmount() {
+    window.removeEventListener('logout', this.handleUserUpdate);
+    window.removeEventListener('login', this.handleUserUpdate);
+    window.removeEventListener('userUpdated', this.handleUserUpdate);
   },
   computed: {
     ...mapState(['sidebarBgColor']),

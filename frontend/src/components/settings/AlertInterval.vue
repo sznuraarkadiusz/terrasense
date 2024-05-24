@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-md w-full lg:w-1/2 px-4 sm:py-4">
+  <div class="max-w-md w-full lg:w-1/2 px-4 py-4">
     <div class="bg-white p-6 rounded-lg shadow-xl">
       <div class="alert-interval flex flex-col items-center justify-center">
         <h2 class="alert-interval__title text-xl font-semibold mb-4">Częstotliwość powiadomień</h2>

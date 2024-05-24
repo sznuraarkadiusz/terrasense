@@ -1,5 +1,5 @@
   <template>
-        <div class="max-w-md w-full lg:w-1/2 px-4 sm:py-4">
+        <div class="max-w-md w-full lg:w-1/2 px-4 py-4">
           <div class="bg-white p-6 rounded-lg shadow-xl">
     <div class="colors-customizaton">
       <h2 class="colors-customizaton__title text-xl font-semibold mb-4">Kolor motywu</h2>

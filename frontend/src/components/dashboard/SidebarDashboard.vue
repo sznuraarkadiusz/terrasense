@@ -10,7 +10,6 @@
           <li class="p-3 hover:bg-gray-700"><router-link to="/calendar">Archiwum</router-link></li>
           <li class="p-3 hover:bg-gray-700"><router-link to="/settings">Ustawienia</router-link></li>
           <li class="p-3 hover:bg-gray-700"><router-link to="/user-management">Użytkownicy</router-link></li>
-          <li class="p-3 hover:bg-gray-700"><a href="#">Pomoc</a></li>
           <li class="p-3 hover:bg-gray-700"><a href="http://192.168.68.155:3000/d/cdm0ejxl5mv40c/wykresy?orgId=1&refresh=5s" target="_blank">Grafana</a></li>
         </ul>
       </div>

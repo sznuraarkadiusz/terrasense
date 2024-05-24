@@ -1,5 +1,5 @@
 <template>
-        <div class="max-w-md w-full lg:w-1/2 px-4">
+        <div class="max-w-md w-full lg:w-1/2 px-4 py-4">
         <div class="bg-white p-6 rounded-lg shadow-xl">
   <div class="sensor-manager">
     <h2 class="sensor-manager__title text-xl font-semibold mb-4">Widoczność czujników</h2>
