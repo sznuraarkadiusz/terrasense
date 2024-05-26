@@ -36,7 +36,7 @@ export default {
     checkLoginStatus() {
       axios.get('/session-status').then(response => {
         if (response.data.logged_in) {
-          this.user = { name: response.data.user };
+          this.user = response.data.user;
         } else {
           this.user = null;
         }

@@ -8,6 +8,7 @@ import CalendarView from '@/views/CalendarView';
 import loginUser from '@/components/users/loginUser';
 import registerUser from '@/components/users/registerUser';
 import managementUser from '@/components/users/managementUser'
+import axios from 'axios';
 
 const routes = [
   {
@@ -63,6 +64,28 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  const isAuthenticated = localStorage.getItem('isAuthenticated');
+
+  if (requiresAuth && !isAuthenticated) {
+    axios.get('/session-status').then(response => {
+      if (response.data.logged_in) {
+        localStorage.setItem('isAuthenticated', 'true');
+        next();
+      } else {
+        localStorage.removeItem('isAuthenticated');
+        next('/login-prompt');
+      }
+    }).catch(() => {
+      localStorage.removeItem('isAuthenticated');
+      next('/login-prompt');
+    });
+  } else {
+    next();
+  }
 });
 
 export default router;

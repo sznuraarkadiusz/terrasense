@@ -56,7 +56,7 @@ export default {
           alert('Nie udało się zaktualizować interwałów.');
         }
       })
-      .catch(error => console.error('Error updating email intervals:', error));
+      .catch(error => console.error('Błąd podczas aktualizowania interwałów e-maili:', error));
     }
   }
 };
